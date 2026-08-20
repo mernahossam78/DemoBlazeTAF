@@ -1,8 +1,9 @@
 package com.blazedemo.drivers;
 
+import com.blazedemo.utils.dataReader.PropertyReader;
+import com.blazedemo.utils.logs.LogsManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ThreadGuard;
-import utils.PropertyReader;
 
 public class GUIDriver {
 
@@ -14,9 +15,10 @@ public class GUIDriver {
     private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     // Constructor: Creates a browser based on the browserType property and stores it inside ThreadLocal.
-    public GUIDriver(){
+    public GUIDriver() {
         //String browser = PropertyReader.getProperty("browserType");
         Browser browserEnum = Browser.valueOf(browser.toUpperCase());
+        LogsManager.info("Starting driver for browser: " + browserEnum);
         AbstractDriver abstractDriver = browserEnum.getDriverFactory();
         WebDriver driver = ThreadGuard.protect(abstractDriver.createDriver());
         // Store this driver's instance for the current thread.
@@ -25,7 +27,7 @@ public class GUIDriver {
     }
 
     // Tests will call this instead of creating drivers themselves.
-    public WebDriver get(){
+    public WebDriver get() {
         return driverThreadLocal.get();
     }
 

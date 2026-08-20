@@ -1,4 +1,4 @@
 package com.blazedemo.customlisteners;
 
-public class test {kbg
+public class test {
 }

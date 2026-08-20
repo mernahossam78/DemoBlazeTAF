@@ -1,5 +1,6 @@
-package com.blazedemo.utils;
+package com.blazedemo.utils.actions;
 
+import com.blazedemo.utils.logs.LogsManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 
@@ -17,12 +18,14 @@ public class BrowserActions {
     //get current web page URL
     public String getCurrentURL(){
         String url = driver.getCurrentUrl();
+        LogsManager.info("Current URL: " + url);
         return url;
     }
 
     //Navigate to a specific URL
     public void navigateTo(String url){
         driver.get(url);
+        LogsManager.info("Navigated to URL: " + url);
     }
 
     //Refresh the current page

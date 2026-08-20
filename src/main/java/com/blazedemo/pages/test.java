@@ -1,4 +1,4 @@
 package com.blazedemo.pages;
 
-public class test {gj,
+public class test {
 }
