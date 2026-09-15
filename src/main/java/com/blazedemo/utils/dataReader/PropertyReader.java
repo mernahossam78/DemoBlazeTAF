@@ -7,13 +7,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Properties;
 
-
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
-import java.util.Collection;
-import java.util.Properties;
-
 public class PropertyReader {
     //Load properties function to load all data exists on .properties files into system properties
     public static Properties loadProperties() {
@@ -41,7 +34,7 @@ public class PropertyReader {
         try {
             return System.getProperty(key);
         } catch (Exception e) {
-            LogsManager.error("Error getting property: " , key, e.getMessage());
+            LogsManager.error("Error getting property: ", key, e.getMessage());
             return "";
         }
     }

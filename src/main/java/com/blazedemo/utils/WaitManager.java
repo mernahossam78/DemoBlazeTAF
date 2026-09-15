@@ -1,5 +1,6 @@
 package com.blazedemo.utils;
 
+import com.blazedemo.utils.dataReader.PropertyReader;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -15,7 +16,7 @@ public class WaitManager {
 
     public FluentWait<WebDriver> fluentWait() {
         return new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
+                .withTimeout(Duration.ofSeconds(Long.parseLong(PropertyReader.getProperty("DEFAULT_WAIT"))))
                 .pollingEvery(Duration.ofMillis(100))
                 .ignoreAll(getExceptions());
     }
