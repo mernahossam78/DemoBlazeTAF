@@ -2,6 +2,7 @@ package com.automationexercises.media;
 
 import com.automationexercises.utils.TimeManager;
 import com.automationexercises.utils.logs.LogsManager;
+import com.automationexercises.utils.report.AllureAttachementManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -25,7 +26,8 @@ public class ScreenshotManager {
             File screenshotFile = new File(SCREENSHOT_PATH + ScreenshotName + "-" + TimeManager.getTimestamp() + ".png");
             FileUtils.copyFile(screenshotSrc, screenshotFile);
 
-            // TODO: Attach screenshot to allure
+
+            AllureAttachementManager.attachScreenshot(ScreenshotName, screenshotFile.getAbsolutePath());
 
             LogsManager.info("Capturing Screenshot succeeded");
 
