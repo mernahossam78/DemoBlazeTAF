@@ -22,11 +22,11 @@ public abstract class BaseAssertion {
 
     protected abstract void assertEqual(String actual, String expected, String message);
 
-    protected void Equals(String actual, String expected, String message) {
+    public void Equals(String actual, String expected, String message) {
         assertEqual(actual, expected, message);
     }
 
-    protected void isElementVisible(By locator) {
+    public void isElementVisible(By locator) {
 
         boolean flag = waitManager.fluentWait().until(driver1 -> {
             try {
@@ -40,13 +40,13 @@ public abstract class BaseAssertion {
     }
 
     //verify page url
-    protected void assertPageUrl(String expectedUrl) {
+    public void assertPageUrl(String expectedUrl) {
         String actualUrl = driver.getCurrentUrl();
         assertEqual(actualUrl, expectedUrl, "URL does not match expected: " + expectedUrl);
     }
 
     //verify page title
-    protected void assertPageTitle(String expectedTitle) {
+    public void assertPageTitle(String expectedTitle) {
         String actualTitle = driver.getTitle();
         assertEqual(actualTitle, expectedTitle, "Title does not match expected: " + expectedTitle);
     }

@@ -13,7 +13,7 @@ import java.io.File;
 
 
 public class ScreenshotManager {
-    private static final String SCREENSHOT_PATH = "test-output/screenshots";
+    public static final String SCREENSHOT_PATH = "test-output/screenshots";
 
     //take full page screenshot
     public static void takeFullPageScreenshot(WebDriver driver, String ScreenshotName) {
