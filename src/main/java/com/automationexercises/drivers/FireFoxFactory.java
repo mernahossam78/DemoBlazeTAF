@@ -18,8 +18,8 @@ public class FireFoxFactory extends AbstractDriver {
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-popup-blocking");
-        if (PropertyReader.getProperty("excutionType").equalsIgnoreCase("LocalHeadless") ||
-                PropertyReader.getProperty("excutionType").equalsIgnoreCase("Remote")) {
+        if (PropertyReader.getProperty("executionType").equalsIgnoreCase("LocalHeadless") ||
+                PropertyReader.getProperty("executionType").equalsIgnoreCase("Remote")) {
             options.addArguments("--headless");
         }
         return options;
@@ -27,11 +27,11 @@ public class FireFoxFactory extends AbstractDriver {
 
     @Override
     public WebDriver createDriver() {
-        if (PropertyReader.getProperty("excutionType").equalsIgnoreCase("Local") ||
-                PropertyReader.getProperty("excutionType").equalsIgnoreCase("LocalHeadless")) {
+        if (PropertyReader.getProperty("executionType").equalsIgnoreCase("Local") ||
+                PropertyReader.getProperty("executionType").equalsIgnoreCase("LocalHeadless")) {
             return new FirefoxDriver(getOptions());
 
-        } else if (PropertyReader.getProperty("excutionType").equalsIgnoreCase("Remote")) {
+        } else if (PropertyReader.getProperty("executionType").equalsIgnoreCase("Remote")) {
             try {
                 return new RemoteWebDriver(
                         new URI("http://" + remoteHost + ":" + remotePort + "/wd/hub").toURL(), getOptions());
@@ -40,8 +40,8 @@ public class FireFoxFactory extends AbstractDriver {
                 throw new RuntimeException("Failed to create RemoteWebDriver", e);
             }
         } else {
-            LogsManager.error("Invalid execution type: " + PropertyReader.getProperty("excutionType"));
-            throw new IllegalArgumentException("Invalid execution type: " + PropertyReader.getProperty("excutionType"));
+            LogsManager.error("Invalid execution type: " + PropertyReader.getProperty("executionType"));
+            throw new IllegalArgumentException("Invalid execution type: " + PropertyReader.getProperty("executionType"));
         }
     }
 }

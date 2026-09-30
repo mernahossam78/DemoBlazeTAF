@@ -55,7 +55,7 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
                 case ITestResult.SKIP -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
             }
             AllureAttachementManager.attachLogs();
-            AllureAttachementManager.attachScreenshot(String.valueOf(driver), testResult.getName());
+            //AllureAttachementManager.attachScreenshot(String.valueOf(driver), testResult.getName());
         }
     }
 

@@ -16,6 +16,7 @@ public class FileUtils {
     }
 
     //Renaming
+    /*
     public static void renameFile(String oldPath, String newPath) {
         try {
             File oldFile = new File(USER_DIR + oldPath);
@@ -34,13 +35,32 @@ public class FileUtils {
             LogsManager.error("Failed to rename file from " + oldPath + " to " + newPath, e.getMessage());
         }
     }
+*/
+    public static void renameFile(String oldPath, String newPath) {
+        try {
+            File oldFile = new File(oldPath);
+            File newFile = new File(newPath);
+            if (oldFile.exists()) {
+                boolean success = oldFile.renameTo(newFile);
+                if (success) {
+                    LogsManager.info("File renamed from " + oldPath + " to " + newPath);
+                } else {
+                    LogsManager.error("Failed to rename file from " + oldPath + " to " + newPath);
+                }
+            } else {
+                LogsManager.error("File not found: " + oldPath);
+            }
+        } catch (Exception e) {
+            LogsManager.error("Failed to rename file from " + oldPath + " to " + newPath, e.getMessage());
+        }
+    }
 
     //Creating directory
     public static void createDirectory(String path) {
         try {
             File file = new File(USER_DIR + path);
             if (!file.exists()) {
-                file.mkdir();
+                file.mkdirs();
                 LogsManager.info("Directory created: " + path);
             }
         } catch (Exception e) {

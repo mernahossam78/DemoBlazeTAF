@@ -53,9 +53,18 @@ public class AllureReportGenerator {
     }
 
     //rename report file to AllureReport_timestamp.html
+   /*
     public static String renameReport() {
         String newFileName = AllureConstants.REPORT_PREFIX + TimeManager.getTimestamp() + AllureConstants.REPORT_EXTENSION; // AllureReport_20...
         com.automationexercises.FileUtils.renameFile(AllureConstants.REPORT_PATH.resolve(AllureConstants.INDEX_HTML).toString(), newFileName);
+        return newFileName;
+    }
+    */
+    public static String renameReport() {
+        String newFileName = AllureConstants.REPORT_PREFIX + TimeManager.getTimestamp() + AllureConstants.REPORT_EXTENSION;
+        Path oldFile = AllureConstants.REPORT_PATH.resolve(AllureConstants.INDEX_HTML);
+        Path newFile = AllureConstants.REPORT_PATH.resolve(newFileName);
+        com.automationexercises.FileUtils.renameFile(oldFile.toString(), newFile.toString());
         return newFileName;
     }
 }

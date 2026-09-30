@@ -5,6 +5,7 @@ import com.automationexercises.utils.logs.LogsManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 
@@ -112,6 +113,22 @@ public class ElementActions {
 
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});", findElement(locator));
+    }
+
+    //select from dropdown
+    public void selectFromDropdown(By locator, String value) {
+        waitManager.fluentWait().until(d -> {
+            try {
+                WebElement element = d.findElement(locator);
+                scrollToElementJS(locator);
+                Select select = new Select(element);
+                select.selectByVisibleText(value);
+                LogsManager.info("Selected value '" + value + "' from dropdown: " + locator.toString());
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        });
     }
 
 }

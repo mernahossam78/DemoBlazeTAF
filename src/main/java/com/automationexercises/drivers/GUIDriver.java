@@ -16,15 +16,14 @@ public class GUIDriver {
 
     // Read the browser name (chrome, edge, firefox...) from the properties file.
     // This value is loaded once when a GUIDriver object is created.
-    // private String browser = PropertyReader.getProperty("browserType");
+    private final String browser = PropertyReader.getProperty("browserType");
     // ThreadLocal gives each running test its own WebDriver instance.
     // This prevents tests from sharing the same browser when running in parallel.
-    // private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    private final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     // Constructor: Creates a browser based on the browserType property and stores it inside ThreadLocal.
-/*
+
     public GUIDriver() {
-        PropertyReader.loadProperties();
 
         //String browser = PropertyReader.getProperty("browserType");
         LogsManager.info("Browser type from properties file: " + browser);
@@ -35,9 +34,9 @@ public class GUIDriver {
         // Store this driver's instance for the current thread.
         driverThreadLocal.set(driver);
     }
-*/
 
-    
+
+    /*
     private final String browser;
     private final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
@@ -53,7 +52,7 @@ public class GUIDriver {
         driverThreadLocal.set(driver);
     }
 
-
+*/
     public ElementActions element() {
         return new ElementActions(get());
     }
