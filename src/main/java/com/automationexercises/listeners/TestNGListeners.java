@@ -1,4 +1,4 @@
-package com.automationexercises.customlisteners;
+package com.automationexercises.listeners;
 
 import com.automationexercises.FileUtils;
 import com.automationexercises.drivers.WebDriverProvider;

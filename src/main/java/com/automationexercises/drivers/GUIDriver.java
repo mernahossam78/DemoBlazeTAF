@@ -13,24 +13,46 @@ import org.openqa.selenium.support.ThreadGuard;
 
 public class GUIDriver {
 
+
     // Read the browser name (chrome, edge, firefox...) from the properties file.
     // This value is loaded once when a GUIDriver object is created.
-    private final String browser = PropertyReader.getProperty("browserType");
+    // private String browser = PropertyReader.getProperty("browserType");
     // ThreadLocal gives each running test its own WebDriver instance.
     // This prevents tests from sharing the same browser when running in parallel.
-    private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    // private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
     // Constructor: Creates a browser based on the browserType property and stores it inside ThreadLocal.
+/*
     public GUIDriver() {
+        PropertyReader.loadProperties();
+
         //String browser = PropertyReader.getProperty("browserType");
-        Browser browserEnum = Browser.valueOf(browser.toUpperCase());
-        LogsManager.info("Starting driver for browser: " + browserEnum);
-        AbstractDriver abstractDriver = browserEnum.getDriverFactory();
+        LogsManager.info("Browser type from properties file: " + browser);
+        Browser browserType = Browser.valueOf(browser.toUpperCase());
+        LogsManager.info("Starting driver for browser: " + browserType);
+        AbstractDriver abstractDriver = browserType.getDriverFactory();
         WebDriver driver = ThreadGuard.protect(abstractDriver.createDriver());
         // Store this driver's instance for the current thread.
         driverThreadLocal.set(driver);
-
     }
+*/
+
+    
+    private final String browser;
+    private final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+
+    public GUIDriver() {
+        PropertyReader.loadProperties();          // 1. load first
+        browser = PropertyReader.getProperty("browserType");   // 2. then read
+
+        LogsManager.info("Browser type from properties file: " + browser);
+        Browser browserType = Browser.valueOf(browser.toUpperCase());
+        LogsManager.info("Starting driver for browser: " + browserType);
+        AbstractDriver abstractDriver = browserType.getDriverFactory();
+        WebDriver driver = ThreadGuard.protect(abstractDriver.createDriver());
+        driverThreadLocal.set(driver);
+    }
+
 
     public ElementActions element() {
         return new ElementActions(get());

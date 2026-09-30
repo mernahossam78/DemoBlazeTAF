@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Properties;
 
 public class PropertyReader {
+
     //Load properties function to load all data exists on .properties files into system properties
     public static Properties loadProperties() {
         try {

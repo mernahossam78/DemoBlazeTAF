@@ -1,46 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
     <artifactId>TAF</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!-- ========================================================= -->
+    <!-- Properties                                                -->
+    <!-- ========================================================= -->
+
     <properties>
         <maven.compiler.source>26</maven.compiler.source>
         <maven.compiler.target>26</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Allure -->
         <allure.version>2.35.3</allure.version>
-        <aspectj.version>1.9.21</aspectj.version>
+
+        <!-- AspectJ -->
+        <aspectj.version>1.9.25.1</aspectj.version>
+
+        <!-- Selenium -->
+        <selenium.version>4.45.0</selenium.version>
+
+        <!-- TestNG -->
+        <testng.version>7.12.0</testng.version>
+
+        <!-- JUnit -->
+        <junit.version>5.13.2</junit.version>
     </properties>
 
+
+    <!-- ========================================================= -->
+    <!-- Build                                                     -->
+    <!-- ========================================================= -->
+
     <build>
+
         <directory>test-output/target</directory>
+
         <plugins>
+
+            <!-- Maven Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+
+            <!-- Surefire / TestNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
+
                 <configuration>
+
+                    <!--
+                        IMPORTANT:
+                        The AspectJ agent uses the SAME version as the
+                        AspectJ dependency above.
+                    -->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+
                 </configuration>
 
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+
             </plugin>
+
         </plugins>
+
     </build>
 
+
+    <!-- ========================================================= -->
+    <!-- Dependency Management                                     -->
+    <!-- ========================================================= -->
+
     <dependencyManagement>
+
         <dependencies>
+
+            <!-- Allure BOM -->
             <dependency>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-bom</artifactId>
@@ -48,52 +110,78 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
+
     </dependencyManagement>
 
+
+    <!-- ========================================================= -->
+    <!-- Dependencies                                              -->
+    <!-- ========================================================= -->
+
     <dependencies>
-        <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
+        <!-- ===================================================== -->
+        <!-- Selenium                                               -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.45.0</version>
-            <scope>compile</scope>
+            <version>${selenium.version}</version>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.testng/testng -->
+
+        <!-- ===================================================== -->
+        <!-- TestNG                                                  -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.12.0</version>
+            <version>${testng.version}</version>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- JUnit                                                   -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.13.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Logging                                                 -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.25.4</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.25.0</version>
-            <scope>compile</scope>
+            <version>2.25.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
-            <version>2.26.0</version>
-            <scope>compile</scope>
+            <version>2.25.4</version>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Apache Commons IO                                      -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>commons-io</groupId>
@@ -101,73 +189,110 @@
             <version>2.20.0</version>
         </dependency>
 
+
+        <!-- ===================================================== -->
+        <!-- JSON                                                    -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>3.0.0</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
-            <scope>compile</scope>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Apache POI                                              -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.5.1</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.5.1</version>
-            <scope>compile</scope>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Allure                                                  -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <scope>compile</scope>
         </dependency>
 
+
+        <!-- ===================================================== -->
+        <!-- AspectJ                                                 -->
+        <!-- ===================================================== -->
+
+        <!--
+            IMPORTANT:
+            This MUST match the version used by the Surefire
+            -javaagent above.
+        -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
 
+
+        <!-- ===================================================== -->
+        <!-- Java Audio/Video Encoding                               -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>ws.schild</groupId>
             <artifactId>jave-all-deps</artifactId>
             <version>3.5.0</version>
-            <scope>compile</scope>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Video Recorder                                          -->
+        <!-- ===================================================== -->
 
         <dependency>
             <groupId>com.automation-remarks</groupId>
             <artifactId>video-recorder-testng</artifactId>
             <version>2.0</version>
-            <scope>compile</scope>
         </dependency>
+
+
+        <!-- ===================================================== -->
+        <!-- Allure Environment Writer                               -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>com.github.automatedowl</groupId>
             <artifactId>allure-environment-writer</artifactId>
             <version>1.0.0</version>
         </dependency>
 
+
+        <!-- ===================================================== -->
+        <!-- Jsoup                                                   -->
+        <!-- ===================================================== -->
+
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.23.2</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
-
 
 </project>
