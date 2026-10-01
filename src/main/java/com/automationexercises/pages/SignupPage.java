@@ -47,14 +47,10 @@ public class SignupPage {
 
     @Step("Fill registeration form")
     public SignupPage fillRegistrationForm(String title,
-                                           String nameText,
-                                           String emailText,
                                            String passwordText,
                                            String dayText,
                                            String monthText,
                                            String yearText,
-                                           String newsletterText,
-                                           String offersText,
                                            String firstNameText,
                                            String lastNameText,
                                            String companyText,
@@ -66,8 +62,6 @@ public class SignupPage {
                                            String zipcodeText,
                                            String mobileNumberText) {
         chooseTitle(title);
-        driver.element().type(name, nameText);
-        driver.element().type(email, emailText);
         driver.element().type(password, passwordText);
         driver.element().selectFromDropdown(day, dayText);
         driver.element().selectFromDropdown(month, monthText);

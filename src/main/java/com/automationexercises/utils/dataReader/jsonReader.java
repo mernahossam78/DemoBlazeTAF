@@ -24,7 +24,7 @@ public class jsonReader {
 
     //excel - csv - json - properties
 
-    private final String TEST_DATA_PATH = "src/test/resources/test-data";
+    private final String TEST_DATA_PATH = "src/test/resources/test-data/";
 
     String jsonReader;
     String jsonFileName;

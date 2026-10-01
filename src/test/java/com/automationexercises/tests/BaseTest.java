@@ -4,6 +4,7 @@ import com.automationexercises.drivers.GUIDriver;
 import com.automationexercises.drivers.WebDriverProvider;
 import com.automationexercises.utils.dataReader.jsonReader;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeClass;
 
 public class BaseTest implements WebDriverProvider {
 
@@ -11,8 +12,9 @@ public class BaseTest implements WebDriverProvider {
 
     protected jsonReader testData;
 
-    public void beforClass() {
-        testData = new jsonReader("");
+    @BeforeClass
+    public void preCondition() {
+        testData = new jsonReader("register-data");
     }
 
     @Override
