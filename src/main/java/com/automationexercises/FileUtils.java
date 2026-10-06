@@ -68,6 +68,16 @@ public class FileUtils {
         }
     }
 
+    //Force delete
+    public static void forceDelete(File file) {
+        try {
+            org.apache.commons.io.FileUtils.forceDelete(file);
+            LogsManager.info("File deleted: " + file.getAbsolutePath());
+        } catch (Exception e) {
+            LogsManager.error("Failed to force delete file: " + file.getAbsolutePath(), e.getMessage());
+        }
+    }
+
     //Cleaning directory
     public static void cleanDirectory(File file) {
         try {
