@@ -1,7 +1,6 @@
 package com.automationexercises.pages.components;
 
 import com.automationexercises.drivers.GUIDriver;
-import com.automationexercises.pages.SignupPage;
 import com.automationexercises.utils.dataReader.PropertyReader;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -18,11 +17,13 @@ public class SignupLogin {
     private final By signupLabel = By.cssSelector("div.signup-form > h2");
     private final By loginError = By.xpath("//p[text()='Your email or password is incorrect!']");
     private final By registeredError = By.cssSelector(".signup-form p");
+    public NavigationBarComponent navigationBar;
     private GUIDriver driver;
 
 
     public SignupLogin(GUIDriver driver) {
         this.driver = driver;
+        this.navigationBar = new NavigationBarComponent(driver);
     }
 
     //actions
@@ -65,9 +66,9 @@ public class SignupLogin {
     }
 
     @Step("Click on Signup Button")
-    public SignupPage clickSignupButton() {
+    public SignupLogin clickSignupButton() {
         driver.element().click(signupButton);
-        return new SignupPage(driver);
+        return new SignupLogin(driver);
     }
 
     //validations
