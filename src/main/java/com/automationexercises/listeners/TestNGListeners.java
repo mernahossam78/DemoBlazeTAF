@@ -77,8 +77,6 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
         //Implement logic to clean test output directories
         FileUtils.cleanDirectory(AllureConstants.RESULTS_FOLDER.toFile());
         FileUtils.cleanDirectory(new File(ScreenshotManager.SCREENSHOT_PATH));
-        FileUtils.forceDelete(new File(LogsManager.LOGS_PATH + File.separator + "logs.log"));
-
     }
 
     private void createTestOutputDirectories() {
