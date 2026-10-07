@@ -5,6 +5,7 @@ import com.automationexercises.utils.logs.LogsManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class ElementActions {
     }
 
     //Clicking
-    public void click(By locator) {
+    public ElementActions click(By locator) {
         waitManager.fluentWait().until(d ->
                 {
                     try {
@@ -39,13 +40,34 @@ public class ElementActions {
                     }
                 }
         );
+        return this;
 
 
     }
 
+    public ElementActions hover(By locator) {
+        waitManager.fluentWait().until(d ->
+                {
+                    try {
+
+                        WebElement element = d.findElement(locator);
+                        scrollToElementJS(locator);
+                        new Actions(d).moveToElement(element).perform();
+                        LogsManager.info("Hovered over element: " + locator.toString());
+                        return true;
+
+                    } catch (Exception e) {
+                        return false; //false here means that the until wil restart all over again
+                        //the only way for until to finish is to return true or throw an exception, if we return false it will keep trying until the timeout is reached
+                    }
+                }
+        );
+        return this;
+    }
+
 
     //Typing
-    public void type(By locator, String text) {
+    public ElementActions type(By locator, String text) {
         waitManager.fluentWait().until(d ->
                 {
                     try {
@@ -63,6 +85,7 @@ public class ElementActions {
                     }
                 }
         );
+        return this;
 
     }
 
@@ -87,7 +110,7 @@ public class ElementActions {
     }
 
     //Upload file
-    public void uploadFile(By locator, String filePath) {
+    public ElementActions uploadFile(By locator, String filePath) {
         String fileAbsolute = System.getProperty("user.dir") + File.separator + filePath;
         waitManager.fluentWait().until(d -> {
                     try {
@@ -101,6 +124,7 @@ public class ElementActions {
                     }
                 }
         );
+        return this;
     }
 
     //Find and element
