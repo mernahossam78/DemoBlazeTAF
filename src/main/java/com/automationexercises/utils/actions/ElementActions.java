@@ -3,6 +3,7 @@ package com.automationexercises.utils.actions;
 import com.automationexercises.utils.WaitManager;
 import com.automationexercises.utils.logs.LogsManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -30,9 +31,21 @@ public class ElementActions {
 
                         WebElement element = d.findElement(locator);
                         scrollToElementJS(locator);
+                        //Wait until the element is stable (not moving) before clicking
+                        /*Point initialLocation = element.getLocation();
+                        LogsManager.info("Initial location: " + initialLocation);
+                        Point finalLocation = element.getLocation();
+                        LogsManager.info("Final location: " + finalLocation);
+                        if(!initialLocation.equals(finalLocation)){
+                            return false; //element is moving, wait for it to stabilize
+                        }
+
+                         */
                         element.click();
                         LogsManager.info("Clicked on element: " + locator.toString());
                         return true;
+
+
 
                     } catch (Exception e) {
                         return false; //false here means that the until wil restart all over again

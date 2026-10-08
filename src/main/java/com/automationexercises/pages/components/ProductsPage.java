@@ -28,11 +28,11 @@ public class ProductsPage {
 
     //dynamic locator
     private By productName(String productName) {
-        return By.xpath("//div[@class='overlay-content']/p[.='" + productName + "']");
+        return By.xpath("//div[contains(@class,'productinfo')]/p[.='" + productName + "']");
     }
 
     private By productPrice(String productName) {
-        return By.xpath("//div[@class='overlay-content']/p[.='" + productName + "']//preceding-sibling::h2");
+        return By.xpath("//div[contains(@class,'productinfo')]/p[.='" + productName + "']/preceding-sibling::h2");
     }
 
     private By hoverOverProduct(String productId) {

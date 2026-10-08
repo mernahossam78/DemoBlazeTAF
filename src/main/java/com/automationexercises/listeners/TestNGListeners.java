@@ -46,7 +46,7 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         WebDriver driver = null;
         if (method.isTestMethod()) {
-            Validation.assertAll();
+            Validation.assertAll(testResult);
             if (testResult.getInstance() instanceof WebDriverProvider provider)
                 driver = provider.getWebDriver(); //initialize driver from WebDriverProvider
             switch (testResult.getStatus()) {
