@@ -1,0 +1,30 @@
+{
+  "name": "Automation_checkout",
+  "email": "automationcheckout_",
+  "titleMale": "Mr",
+  "titleFemale": "Mrs",
+  "password": "Test@123",
+  "day": "1",
+  "month": "January",
+  "year": "2000",
+  "firstName": "Automation_Firstname",
+  "lastName": "Automation_Lastname",
+  "companyName": "Automation_Company",
+  "address1": "Automation_Address1",
+  "address2": "Automation_Address2",
+  "country": "India",
+  "city": "Automation_City",
+  "state": "Automation_State",
+  "zipcode": "12345",
+  "mobileNumber": "0123456789",
+  "product": {
+    "name": "Men Tshirt",
+    "price": "Rs. 400",
+    "productId": "2",
+    "quantity": "1",
+    "total": "Rs. 400"
+  },
+  "messages": {
+    "cartAdded": "Your product has been added to cart."
+  }
+}

@@ -3,13 +3,13 @@ package com.automationexercises.utils.actions;
 import com.automationexercises.utils.WaitManager;
 import com.automationexercises.utils.logs.LogsManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
+import java.util.List;
 
 public class ElementActions {
     //that class will contain all the actions that we will reuse
@@ -44,7 +44,6 @@ public class ElementActions {
                         element.click();
                         LogsManager.info("Clicked on element: " + locator.toString());
                         return true;
-
 
 
                     } catch (Exception e) {
@@ -143,6 +142,10 @@ public class ElementActions {
     //Find and element
     public WebElement findElement(By locator) {
         return driver.findElement(locator);
+    }
+
+    public List<WebElement> findElements(By locator) {
+        return driver.findElements(locator);
     }
 
     //Function to scroll to an element using js
