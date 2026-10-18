@@ -1,7 +1,7 @@
 package com.automationexercises.pages.components;
 
 import com.automationexercises.drivers.GUIDriver;
-import com.automationexercises.pages.OrderPage;
+import com.automationexercises.pages.PaymentPage;
 import com.automationexercises.utils.dataReader.PropertyReader;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -48,9 +48,9 @@ public class CheckoutPage {
     }
 
     @Step("Click on Place Order")
-    public OrderPage clickOnPlaceOrder() {
+    public PaymentPage clickOnPlaceOrder() {
         driver.element().click(placeOrderButton);
-        return new OrderPage(driver);
+        return new PaymentPage(driver);
     }
 
 
@@ -88,8 +88,8 @@ public class CheckoutPage {
         List<WebElement> totals = driver.element().findElements(productTotals);
         double sum = 0.0;
         String totalAmountText = driver.element().findElement(totalAmount).getText();
-        double totalAmount = Double.parseDouble(
-                totalAmountText.replaceAll("[^0-9.]", "")
+        int totalAmount = Integer.parseInt(
+                totalAmountText.replaceAll("[^0-9]", "")
         );
         for (WebElement total : totals) {
             String priceText = total.getText();
@@ -98,7 +98,7 @@ public class CheckoutPage {
             );
             sum += price;
         }
-        driver.verification().Equals(String.valueOf(sum), String.valueOf(totalAmount), "Total number does not match");
+        driver.verification().Equals(String.valueOf((int) sum), String.valueOf(totalAmount), "Total number does not match");
         return this;
     }
 

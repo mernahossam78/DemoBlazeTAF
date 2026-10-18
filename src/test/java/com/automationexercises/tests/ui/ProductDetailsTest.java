@@ -1,6 +1,7 @@
 package com.automationexercises.tests.ui;
 
 import com.automationexercises.drivers.GUIDriver;
+import com.automationexercises.drivers.UITest;
 import com.automationexercises.pages.components.NavigationBarComponent;
 import com.automationexercises.pages.components.ProductsPage;
 import com.automationexercises.tests.BaseTest;
@@ -11,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+@UITest
 public class ProductDetailsTest extends BaseTest {
     String timeStamp = TimeManager.getSimpleTimestamp();
 

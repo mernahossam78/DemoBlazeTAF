@@ -2,12 +2,14 @@ package com.automationexercises.tests.ui;
 
 import com.automationexercises.apis.UserManagementAPI;
 import com.automationexercises.drivers.GUIDriver;
+import com.automationexercises.drivers.UITest;
 import com.automationexercises.pages.SignupPage;
 import com.automationexercises.pages.components.NavigationBarComponent;
 import com.automationexercises.pages.components.SignupLogin;
 import com.automationexercises.tests.BaseTest;
 import com.automationexercises.utils.TimeManager;
 import com.automationexercises.utils.dataReader.jsonReader;
+import com.automationexercises.utils.logs.LogsManager;
 import io.qameta.allure.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -19,6 +21,7 @@ import org.testng.annotations.Test;
 @Story("User Registration")
 @Severity(SeverityLevel.CRITICAL)
 @Owner("Merna")
+@UITest
 public class RegisterTest extends BaseTest {
 
     String timeStamp = TimeManager.getSimpleTimestamp();
@@ -83,11 +86,14 @@ public class RegisterTest extends BaseTest {
 
                 )
                 .verifyUserCreatedSuccessfully();
+        LogsManager.info("Created in account: " + testData.getJsonData("email") + timeStamp + "@gmail.com");
+
         new SignupLogin(driver).navigate()
                 .enterSignupName(testData.getJsonData("name"))
                 .enterSignupEmail(testData.getJsonData("email") + timeStamp + "@gmail.com")
                 .clickSignupButton()
                 .verifyRegisteredErrorMsg(testData.getJsonData("messages.error"));
+        LogsManager.info("logged in account: " + testData.getJsonData("email") + timeStamp + "@gmail.com");
 
         new UserManagementAPI().deleteUserAccount(
                         testData.getJsonData("email") + timeStamp + "@gmail.com",

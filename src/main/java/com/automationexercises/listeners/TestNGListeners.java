@@ -1,6 +1,7 @@
 package com.automationexercises.listeners;
 
 import com.automationexercises.FileUtils;
+import com.automationexercises.drivers.UITest;
 import com.automationexercises.drivers.WebDriverProvider;
 import com.automationexercises.media.ScreenshotManager;
 import com.automationexercises.utils.dataReader.PropertyReader;
@@ -46,14 +47,17 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         WebDriver driver = null;
         if (method.isTestMethod()) {
-            Validation.assertAll(testResult);
-            if (testResult.getInstance() instanceof WebDriverProvider provider)
-                driver = provider.getWebDriver(); //initialize driver from WebDriverProvider
-            switch (testResult.getStatus()) {
-                case ITestResult.SUCCESS -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
-                case ITestResult.FAILURE -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
-                case ITestResult.SKIP -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
+            if (testResult.getInstance() instanceof UITest) {
+                if (testResult.getInstance() instanceof WebDriverProvider provider)
+                    driver = provider.getWebDriver(); //initialize driver from WebDriverProvider
+                switch (testResult.getStatus()) {
+                    case ITestResult.SUCCESS -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
+                    case ITestResult.FAILURE -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
+                    case ITestResult.SKIP -> ScreenshotManager.takeFullPageScreenshot(driver, testResult.getName());
+                }
             }
+            Validation.assertAll(testResult);
+
             AllureAttachementManager.attachLogs();
             //AllureAttachementManager.attachScreenshot(String.valueOf(driver), testResult.getName());
         }

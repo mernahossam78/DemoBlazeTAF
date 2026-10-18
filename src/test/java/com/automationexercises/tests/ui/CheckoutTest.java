@@ -2,6 +2,7 @@ package com.automationexercises.tests.ui;
 
 import com.automationexercises.apis.UserManagementAPI;
 import com.automationexercises.drivers.GUIDriver;
+import com.automationexercises.drivers.UITest;
 import com.automationexercises.pages.components.CartPage;
 import com.automationexercises.pages.components.NavigationBarComponent;
 import com.automationexercises.pages.components.ProductsPage;
@@ -19,6 +20,7 @@ import org.testng.annotations.Test;
 @Story("Checkout Process")
 @Severity(SeverityLevel.CRITICAL)
 @Owner("Merna")
+@UITest
 public class CheckoutTest extends BaseTest {
     String timeStamp = TimeManager.getSimpleTimestamp();
 
@@ -101,8 +103,17 @@ public class CheckoutTest extends BaseTest {
                         testData.getJsonData("zipcode"),
                         testData.getJsonData("country"),
                         testData.getJsonData("mobileNumber")
-                );
+                )
+                .verifyOrderTotal();
 
+    }
+
+    @Test(dependsOnMethods = {"proceedToCheckout", "addProductToCart", "loginToAccount", "registerNewAccount"})
+    public void deleteAccountAsPostCondition() {
+        new UserManagementAPI()
+                .deleteUserAccount(testData.getJsonData("email") + timeStamp + "@gmail.com",
+                        testData.getJsonData("password"))
+                .verifyUserDeletedSuccessfully();
     }
 
 
