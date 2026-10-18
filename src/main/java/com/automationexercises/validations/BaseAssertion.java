@@ -1,5 +1,6 @@
 package com.automationexercises.validations;
 
+import com.automationexercises.FileUtils;
 import com.automationexercises.utils.WaitManager;
 import com.automationexercises.utils.actions.ElementActions;
 import org.openqa.selenium.By;
@@ -53,6 +54,11 @@ public abstract class BaseAssertion {
     public void assertPageTitle(String expectedTitle) {
         String actualTitle = driver.getTitle();
         assertEqual(actualTitle, expectedTitle, "Title does not match expected: " + expectedTitle);
+    }
+
+    //verify that file exists
+    public void assertFileExists(String fileName, String message) {
+        assertTrue(FileUtils.isFileExists(fileName), message);
     }
 
 }

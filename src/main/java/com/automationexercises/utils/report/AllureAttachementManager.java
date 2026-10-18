@@ -2,8 +2,6 @@ package com.automationexercises.utils.report;
 
 import com.automationexercises.utils.logs.LogsManager;
 import io.qameta.allure.Allure;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.LoggerContext;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -24,6 +22,24 @@ public class AllureAttachementManager {
         }
     }
 
+
+    public static void attachLogs() {
+        try {
+            File logFile = new File(LogsManager.LOGS_PATH + "logs.log");
+
+            if (logFile.exists()) {
+                Allure.addAttachment(
+                        "logs.log",
+                        "text/plain",
+                        Files.newInputStream(logFile.toPath()),
+                        ".txt"
+                );
+            }
+        } catch (Exception e) {
+            LogsManager.error("Error attaching logs", e.getMessage());
+        }
+    }
+    /*
     public static void attachLogs() {
         try {
             LogManager.shutdown();
@@ -36,6 +52,8 @@ public class AllureAttachementManager {
             LogsManager.error("Error attaching logs", e.getMessage());
         }
     }
+
+     */
 
 
 }

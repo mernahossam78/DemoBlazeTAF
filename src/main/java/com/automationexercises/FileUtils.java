@@ -87,4 +87,11 @@ public class FileUtils {
             LogsManager.error("Failed to clean directory: " + file.getAbsolutePath(), e.getMessage());
         }
     }
+
+    //check if the file exists
+    public static boolean isFileExists(String fileName) {
+        String downloadPath = System.getProperty("user.dir") + File.separator + "src/test/resources/downloads/";
+        File file = new File(downloadPath + fileName);
+        return file.exists();
+    }
 }

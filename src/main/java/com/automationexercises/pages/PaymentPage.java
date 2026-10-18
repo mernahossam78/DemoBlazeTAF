@@ -52,4 +52,8 @@ public class PaymentPage {
         return this;
     }
 
+    public PaymentPage verifyDownloadedFile(String invoiceName) {
+        driver.verification().assertFileExists(invoiceName, "Invoice file does not exist: ");
+        return this;
+    }
 }
