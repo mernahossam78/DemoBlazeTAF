@@ -26,10 +26,10 @@ public class ChromeFactory extends AbstractDriver {
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("download.default_directory");
-        // options.setCapability(CapabilityType.ENABLE_DOWNLOADS, true);
+        options.setCapability(CapabilityType.ENABLE_DOWNLOADS, true);
         Map<String, Object> prefs = new HashMap<>();
         String userDir = System.getProperty("user.dir");
-        String downloadPath = userDir + "\\src\\test\\resources";
+        String downloadPath = userDir + "\\src\\test\\resources\\downloads";
         prefs.put("profile.default_content_settings.popups", 0);
         prefs.put("download.prompt_for_download", false);
         prefs.put("download.default_directory", downloadPath);

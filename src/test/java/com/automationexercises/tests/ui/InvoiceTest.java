@@ -13,6 +13,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 @Epic("Automation Exercise")
 @Feature("UI Invoice")
 @Story("Invoice")
@@ -119,7 +121,7 @@ public class InvoiceTest extends BaseTest {
     }
 
     @Test(dependsOnMethods = {"paymentTest", "proceedToCheckout", "addProductToCart", "loginToAccount", "registerNewAccount"})
-    public void downloadInvoice() {
+    public void downloadInvoice() throws IOException {
         new PaymentPage(driver)
                 .clickDownloadInvoiceButton()
                 .verifyDownloadedFile(testData.getJsonData("invoiceName"));

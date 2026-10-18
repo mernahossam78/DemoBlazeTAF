@@ -89,9 +89,38 @@ public class FileUtils {
     }
 
     //check if the file exists
+
     public static boolean isFileExists(String fileName) {
         String downloadPath = System.getProperty("user.dir") + File.separator + "src/test/resources/downloads/";
         File file = new File(downloadPath + fileName);
         return file.exists();
     }
+
+
+    /*
+    public static boolean isFileExists(String fileName) {
+        Path filePath = Paths.get(
+                System.getProperty("user.dir"),
+                "src", "test", "resources", "downloads", fileName
+        );
+
+        try {
+            return new FluentWait<>(filePath)
+                    .withTimeout(Duration.ofSeconds(10))
+                    .pollingEvery(Duration.ofMillis(500))
+                    .until(path ->
+                            {
+                                try {
+                                    return Files.exists(path) && Files.size(path) > 0;
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                    );
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+     */
 }
