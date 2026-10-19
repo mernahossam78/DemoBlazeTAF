@@ -16,7 +16,11 @@ import org.testng.*;
 
 import java.io.File;
 
-public class TestNGListeners implements IExecutionListener, IInvokedMethodListener, ITestListener {
+public class TestNGListeners implements ISuiteListener, IExecutionListener, IInvokedMethodListener, ITestListener {
+
+    public void onStart(ISuite suite) {
+        suite.getXmlSuite().setName("Automation Exercise");
+    }
 
     public void onExecutionStart() {
         LogsManager.info("Execution started");
@@ -81,10 +85,13 @@ public class TestNGListeners implements IExecutionListener, IInvokedMethodListen
         //Implement logic to clean test output directories
         FileUtils.cleanDirectory(AllureConstants.RESULTS_FOLDER.toFile());
         FileUtils.cleanDirectory(new File(ScreenshotManager.SCREENSHOT_PATH));
+        FileUtils.cleanDirectory(new File("src/test/resources/downloads"));
+
     }
 
     private void createTestOutputDirectories() {
         FileUtils.createDirectory(ScreenshotManager.SCREENSHOT_PATH);
         //we didn't create new dirs. for logs and allure because they are created automatically
+        FileUtils.createDirectory("src/test/resources/downloads");
     }
 }
